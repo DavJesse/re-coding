@@ -8,6 +8,7 @@ import (
 	"davodhiambo/add"
 	"davodhiambo/greeting"
 	"davodhiambo/models"
+	"davodhiambo/sorting"
 )
 
 func main() {
@@ -17,7 +18,7 @@ func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	// Display greeting message and home menu
 	greeting.Greeting()
-	//greeting.HomeMenu()
+	// greeting.HomeMenu()
 
 	for {
 		greeting.HomeMenu()
@@ -50,11 +51,12 @@ func main() {
 
 		} else if scanner.Text() == "2" {
 			// Print all tasks
+			sorting.Sort(tasks)
 			fmt.Println("Your Tasks:")
 			for _, task := range tasks {
-				fmt.Println(task.ID)
-				fmt.Println(task.Description)
-				fmt.Println(task.Priority)
+				fmt.Printf("Task: %d\n\n", task.ID)
+				fmt.Printf("Description:\n %s\n\n", task.Description)
+				fmt.Printf("Priority: %d\n\n", task.Priority)
 			}
 
 		} else if scanner.Text() == "3" {
