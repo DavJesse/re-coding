@@ -51,6 +51,11 @@ func main() {
 
 		} else if scanner.Text() == "2" {
 			// Print all tasks
+			if len(tasks) == 0 {
+				fmt.Println("You have no tasks")
+				fmt.Println()
+				continue
+			}
 			sorting.Sort(tasks)
 			fmt.Println("Your Tasks:")
 			for _, task := range tasks {
