@@ -15,16 +15,14 @@ func main() {
 	var task models.Task
 	var err error
 	scanner := bufio.NewScanner(os.Stdin)
-
+	// Display greeting message and home menu
 	greeting.Greeting()
-	for scanner.Scan() {
-		fmt.Println("Key '1' to Add Task")
-		fmt.Println("Key '2' to View Task")
-		fmt.Println("Key '3' to Delete Task")
-		fmt.Println("Key '4' to Update Task")
-		fmt.Println("Key '5' to Exit Program")
-		fmt.Println()
-		
+	//greeting.HomeMenu()
+
+	for {
+		greeting.HomeMenu()
+		scanner.Scan()
+
 		if scanner.Text() == "1" {
 			// Prompt user to add a description for new task
 			add.PromptDescription()
@@ -35,7 +33,7 @@ func main() {
 			add.AddPriority()
 			scanner.Scan()
 			task, err = add.CheckPriority(scanner.Text(), task)
-		
+
 			// Handle errors when adding priority
 			for err != nil {
 				fmt.Println(err)
@@ -43,17 +41,22 @@ func main() {
 				scanner.Scan()
 				task, err = add.CheckPriority(scanner.Text(), task)
 			}
+
+			// Append new task to tasks slice and print success message
 			tasks = add.Append(task, tasks)
 			fmt.Println("Task added successfully!")
 			fmt.Println()
-			continue
+			continue // return to home
+
 		} else if scanner.Text() == "2" {
+			// Print all tasks
 			fmt.Println("Your Tasks:")
 			for _, task := range tasks {
 				fmt.Println(task.ID)
 				fmt.Println(task.Description)
 				fmt.Println(task.Priority)
 			}
+
 		} else if scanner.Text() == "3" {
 		} else if scanner.Text() == "4" {
 		} else if scanner.Text() == "5" {
