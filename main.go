@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 
 	"davodhiambo/add"
 	"davodhiambo/display"
@@ -67,6 +68,26 @@ func main() {
 			fmt.Println()
 			fmt.Println("Key in the ID of the task you wish to delete:")
 			scanner.Scan()
+
+			id, err := strconv.Atoi(scanner.Text())
+
+			for err != nil || id > len(tasks) {
+				if err != nil {
+					fmt.Println("Invalid input.")
+				} else {
+					fmt.Println("Task does not exist.")
+				}
+				fmt.Println("Try again")
+				fmt.Println()
+				fmt.Println("Which of these tasks do you wish to delete?")
+				display.DisplayTasks(tasks)
+				fmt.Println()
+				fmt.Println("Key in the ID of the task you wish to delete:")
+				scanner.Scan()
+				id, err = strconv.Atoi(scanner.Text())
+			}
+
+			
 
 		} else if scanner.Text() == "4" {
 		} else if scanner.Text() == "5" {
