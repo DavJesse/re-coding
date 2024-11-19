@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"davodhiambo/add"
+	"davodhiambo/display"
 	"davodhiambo/greeting"
 	"davodhiambo/models"
 	"davodhiambo/sorting"
@@ -58,13 +59,15 @@ func main() {
 			}
 			sorting.Sort(tasks)
 			fmt.Println("Your Tasks:")
-			for _, task := range tasks {
-				fmt.Printf("Task: %d\n\n", task.ID)
-				fmt.Printf("Description:\n %s\n\n", task.Description)
-				fmt.Printf("Priority: %d\n\n", task.Priority)
-			}
+			display.DisplayTasks(tasks)
 
 		} else if scanner.Text() == "3" {
+			fmt.Println("Which of these tasks do you wish to delete?")
+			display.DisplayTasks(tasks)
+			fmt.Println()
+			fmt.Println("Key in the ID of the task you wish to delete:")
+			scanner.Scan()
+
 		} else if scanner.Text() == "4" {
 		} else if scanner.Text() == "5" {
 		} else {
