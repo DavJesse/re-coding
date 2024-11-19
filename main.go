@@ -77,11 +77,11 @@ func main() {
 
 			id, err := strconv.Atoi(scanner.Text())
 
-			for err != nil || id > len(tasks) {
+			for err != nil || id > len(tasks) || id < 1 {
 				if err != nil {
 					fmt.Println("Invalid input.")
 				} else {
-					fmt.Println("Task does not exist.")
+					fmt.Printf("Task %d does not exist.\n", id)
 				}
 				fmt.Println("Try again")
 				fmt.Println()
