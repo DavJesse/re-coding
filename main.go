@@ -98,7 +98,39 @@ func main() {
 			continue
 
 		} else if scanner.Text() == "4" {
+			if len(tasks) == 0 {
+				fmt.Println("You have no tasks")
+				fmt.Println()
+				continue
+			}
+			fmt.Println("Which of these tasks do you wish to update?")
+			display.DisplayTasks(tasks)
+			fmt.Println()
+			fmt.Println("Key in the ID of the task you wish to update:")
+			scanner.Scan()
+
+			id, err := strconv.Atoi(scanner.Text())
+
+			for err != nil || id > len(tasks) || id < 1 {
+				if err != nil {
+					fmt.Println("Invalid input.")
+				} else {
+					fmt.Printf("Task %d does not exist.\n", id)
+				}
+				fmt.Println("Try again")
+				fmt.Println()
+				fmt.Println("Which of these tasks do you wish to update?")
+				display.DisplayTasks(tasks)
+				fmt.Println()
+				fmt.Println("Key in the ID of the task you wish to update:")
+				scanner.Scan()
+				id, err = strconv.Atoi(scanner.Text())
+			}
+
+
 		} else if scanner.Text() == "5" {
+			fmt.Println("Goodbye!")
+			break
 		} else {
 			fmt.Println("Wrong Input\nTry Again")
 			continue
