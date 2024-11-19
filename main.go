@@ -10,6 +10,7 @@ import (
 	"davodhiambo/display"
 	"davodhiambo/greeting"
 	"davodhiambo/models"
+	"davodhiambo/remove"
 	"davodhiambo/sorting"
 )
 
@@ -63,6 +64,11 @@ func main() {
 			display.DisplayTasks(tasks)
 
 		} else if scanner.Text() == "3" {
+			if len(tasks) == 0 {
+				fmt.Println("You have no tasks")
+				fmt.Println()
+				continue
+			}
 			fmt.Println("Which of these tasks do you wish to delete?")
 			display.DisplayTasks(tasks)
 			fmt.Println()
@@ -87,7 +93,9 @@ func main() {
 				id, err = strconv.Atoi(scanner.Text())
 			}
 
-			
+			tasks = remove.DeleteTask(id, tasks)
+			fmt.Printf("Task %d deleted successfully!\n\n", id)
+			continue
 
 		} else if scanner.Text() == "4" {
 		} else if scanner.Text() == "5" {
